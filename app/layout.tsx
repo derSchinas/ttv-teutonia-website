@@ -1,0 +1,35 @@
+// app/layout.tsx
+import { Inter } from 'next/font/google'
+import { Navbar } from '@/components/layout/navbar'
+import { Footer } from '@/components/layout/footer'
+import { AuthProvider } from '@/components/auth/auth-provider'
+import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata = {
+  title: 'TTV Teutonia',
+  description: 'Studentenverbindung TTV Teutonia',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="de">
+      <body className={inter.className}>
+        <AuthProvider>
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </AuthProvider>
+      </body>
+    </html>
+  )
+}
