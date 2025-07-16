@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import Image from 'next/image'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -38,9 +39,20 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md">
         <CardHeader>
+          <div className="flex justify-center mb-4">
+            <Image
+              src="/logo.png"
+              alt="TTV Teutonia Wappen"
+              width={60}
+              height={60}
+            />
+          </div>
           <CardTitle className="text-2xl text-center">
             Anmelden
           </CardTitle>
+          <p className="text-center text-gray-600">
+            TTV Teutonia Mitgliederbereich
+          </p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">

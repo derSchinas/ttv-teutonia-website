@@ -3,6 +3,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useAuth } from '@/components/auth/auth-provider'
 import { Button } from '@/components/ui/button'
 import { Menu, X, User, LogOut } from 'lucide-react'
@@ -28,7 +29,14 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0">
+            <Link href="/" className="flex-shrink-0 flex items-center">
+              <Image
+                src="/logo.png"
+                alt="TTV Teutonia Wappen"
+                width={40}
+                height={40}
+                className="mr-3"
+              />
               <span className="text-xl font-bold text-gray-800">
                 TTV Teutonia
               </span>

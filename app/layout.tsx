@@ -8,8 +8,11 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'TTV Teutonia',
-  description: 'Studentenverbindung TTV Teutonia',
+  title: 'TTV Teutonia - Studentenverbindung',
+  description: 'Studentenverbindung TTV Teutonia - Tradition und Zukunft seit 1920',
+  icons: {
+    icon: '/logo.png',
+  },
 }
 
 export default function RootLayout({

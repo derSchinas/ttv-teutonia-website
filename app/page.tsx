@@ -1,6 +1,7 @@
 // app/page.tsx
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function HomePage() {
   return (
@@ -9,6 +10,15 @@ export default function HomePage() {
       <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
+            <div className="flex justify-center mb-8">
+              <Image
+                src="/logo.png"
+                alt="TTV Teutonia Wappen"
+                width={120}
+                height={120}
+                className="drop-shadow-lg"
+              />
+            </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               TTV Teutonia
             </h1>
@@ -73,6 +83,43 @@ export default function HomePage() {
                 Unser Verbindungshaus bietet ein zweites Zuhause 
                 mit Zimmern und Gemeinschaftsräumen.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tradition Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                Tradition seit 1920
+              </h2>
+              <p className="text-lg text-gray-600 mb-4">
+                Die TTV Teutonia blickt auf eine über 100-jährige Geschichte zurück. 
+                Gegründet im Jahr 1920, haben wir Generationen von Studenten begleitet 
+                und ihnen ein Zuhause geboten.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Unsere Werte und Traditionen werden von Generation zu Generation 
+                weitergegeben, während wir uns gleichzeitig den Herausforderungen 
+                der modernen Zeit stellen.
+              </p>
+              <Link href="/about">
+                <Button size="lg">
+                  Unsere Geschichte
+                </Button>
+              </Link>
+            </div>
+            <div className="flex justify-center">
+              <Image
+                src="/logo.png"
+                alt="TTV Teutonia Wappen"
+                width={300}
+                height={300}
+                className="drop-shadow-lg"
+              />
             </div>
           </div>
         </div>
