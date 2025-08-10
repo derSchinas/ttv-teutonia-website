@@ -29,10 +29,10 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Kontakt</h3>
             <div className="text-gray-300 space-y-2">
               <p>Verbindungshaus</p>
-              <p>Musterstraße 123</p>
-              <p>12345 Musterstadt</p>
-              <p>Tel: +49 (0) 123 456789</p>
-              <p>info@ttv-teutonia.de</p>
+              <p>Beutterstraße 9</p>
+              <p>72764 Reutlingen</p>
+              <p>Tel: +49 (0) 7121311747</p>
+              <p>webmaster@ttv-teutonia.de</p>
             </div>
           </div>
           

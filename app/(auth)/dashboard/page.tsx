@@ -1,8 +1,10 @@
 // app/(auth)/dashboard/page.tsx
+
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { StatsCards } from '@/components/dashboard/stats-cards'
 import { RecentEvents } from '@/components/dashboard/recent-events'
 import { redirect } from 'next/navigation'
+
 
 export default async function DashboardPage() {
   const supabase = await createServerSupabaseClient()
@@ -31,6 +33,7 @@ export default async function DashboardPage() {
           TTV Teutonia Dashboard
         </p>
       </div>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatsCards />
