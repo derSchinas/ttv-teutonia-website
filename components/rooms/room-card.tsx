@@ -1,63 +1,141 @@
 // components/rooms/room-card.tsx
-'use client'
+"use client";
 
-import type { Room } from '@/app/rooms/page'
-import Image from 'next/image'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import type { Room } from "@/app/rooms/page";
+import Image from "next/image";
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/components/ui/carousel";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription, // Hinzugefügt
+	DialogTitle, // Hinzugefügt
+} from "@/components/ui/dialog";
 
 interface RoomCardProps {
-  room: Room
+	room: Room;
 }
 
 export function RoomCard({ room }: RoomCardProps) {
-  return (
-    <Card className="flex flex-col">
-      {room.room_images && room.room_images.length > 0 && (
-        <Carousel className="w-full rounded-t-lg">
-          <CarouselContent>
-            {room.room_images.map((image) => (
-              <CarouselItem key={image.id}>
-                <div className="relative aspect-video">
-                  <Image
-                    src={image.image_url}
-                    alt={image.alt_text || `Bild von ${room.room_number}`}
-                    fill
-                    className="object-cover rounded-t-lg"
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="absolute left-2" />
-          <CarouselNext className="absolute right-2" />
-        </Carousel>
-      )}
+	const [dialogOpen, setDialogOpen] = useState(false);
+	const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-      <CardHeader>
-        <CardTitle>{room.room_number}</CardTitle>
-        <CardDescription>
-          {room.size_sqm}m² | {room.price_per_month} €/Monat
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        {/* Nur noch die Anzeige, keine Verwaltungsfunktion mehr */}
-        {room.is_available ? (
-          <span className="px-2 py-1 text-sm font-semibold text-green-800 bg-green-100 rounded-full">
-            Frei
-          </span>
-        ) : (
-          <span className="px-2 py-1 text-sm font-semibold text-red-800 bg-red-100 rounded-full">
-            Besetzt
-          </span>
-        )}
-      </CardContent>
-    </Card>
-  )
+	const hasMultipleImages = room.room_images && room.room_images.length > 1;
+
+	const handleImageClick = (index: number) => {
+		setSelectedImageIndex(index);
+		setDialogOpen(true);
+	};
+
+	return (
+		<>
+			<Card className="flex flex-col overflow-hidden p-0 shadow-md">
+				{room.room_images && room.room_images.length > 0 ? (
+					<Carousel className="group relative w-full">
+						<CarouselContent>
+							{room.room_images.map((image, index) => (
+								<CarouselItem
+									key={image.id}
+									onClick={() => handleImageClick(index)}
+									className="cursor-pointer"
+								>
+									<div className="relative aspect-video">
+										<Image
+											src={image.image_url}
+											alt={
+												image.alt_text || `Bild von ${room.room_number}`
+											}
+											fill
+											className="object-cover"
+										/>
+									</div>
+								</CarouselItem>
+							))}
+						</CarouselContent>
+						{hasMultipleImages && (
+							<>
+								<CarouselPrevious className="absolute left-2 opacity-0 transition-opacity group-hover:opacity-100" />
+								<CarouselNext className="absolute right-2 opacity-0 transition-opacity group-hover:opacity-100" />
+							</>
+						)}
+					</Carousel>
+				) : (
+					<div className="flex aspect-video items-center justify-center bg-gray-100 text-sm text-gray-400">
+						Kein Bild verfügbar
+					</div>
+				)}
+
+				<div className="flex flex-grow flex-col p-6">
+					<CardHeader className="p-0">
+						<CardTitle>{room.room_number}</CardTitle>
+					</CardHeader>
+					<CardContent className="flex-grow p-0 pt-4">
+						<div className="mb-4 text-sm text-gray-600">
+							{room.size_sqm && <span>{room.size_sqm}m²</span>}
+							{room.size_sqm && room.price_per_month && (
+								<span className="mx-2">|</span>
+							)}
+							{room.price_per_month && (
+								<span>{room.price_per_month} €/Monat</span>
+							)}
+						</div>
+						<Badge
+							variant={room.is_available ? "success" : "destructive"}
+						>
+							{room.is_available ? "Frei" : "Besetzt"}
+						</Badge>
+					</CardContent>
+				</div>
+			</Card>
+
+			<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+				<DialogContent className="max-h-[90vh] max-w-[90vw] p-2">
+					{/* === HIER IST DIE KORREKTUR === */}
+					<DialogTitle className="sr-only">
+						Bilder von {room.room_number}
+					</DialogTitle>
+					<DialogDescription className="sr-only">
+						Blättern Sie durch die Bilder des Zimmers.
+					</DialogDescription>
+
+					<Carousel
+						opts={{ startIndex: selectedImageIndex, loop: true }}
+						className="h-full w-full"
+					>
+						<CarouselContent>
+							{room.room_images.map(image => (
+								<CarouselItem key={image.id} className="h-full">
+									<div className="relative flex h-full max-h-[85vh] w-full items-center justify-center">
+										<Image
+											src={image.image_url}
+											alt={
+												image.alt_text || `Bild von ${room.room_number}`
+											}
+											width={1920}
+											height={1080}
+											className="h-full w-full object-contain"
+										/>
+									</div>
+								</CarouselItem>
+							))}
+						</CarouselContent>
+						{hasMultipleImages && (
+							<>
+								<CarouselPrevious className="absolute left-4" />
+								<CarouselNext className="absolute right-4" />
+							</>
+						)}
+					</Carousel>
+				</DialogContent>
+			</Dialog>
+		</>
+	);
 }

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { EditNewsForm } from '@/components/ahv/edit-news-form'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import Link from 'next/link'
-import type { NewsArticle } from '@/types/database' // <-- HIER IST DIE KORREKTUR
+import type { NewsArticle } from '@/types/database' 
 
 async function getArticleById(id: string): Promise<NewsArticle> {
   const supabase = await createServerSupabaseClient()

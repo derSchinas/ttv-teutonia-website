@@ -44,19 +44,7 @@ export default async function AHVPage() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* ... (Events, News, Mitglieder Karten bleiben gleich) ... */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Events verwalten</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-600 mb-4">
-              Erstelle und bearbeite Veranstaltungen für die Verbindung.
-            </p>
-            <Link href="/ahv/events" className="text-blue-600 font-semibold hover:underline">
-              Zu den Events →
-            </Link>
-          </CardContent>
-        </Card>
+        
         
         <Card>
           <CardHeader>

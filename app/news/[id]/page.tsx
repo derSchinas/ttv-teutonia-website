@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const article = await getArticle(params.id)
   return {
     title: `${article.title} | TTV Teutonia News`,
-    description: article.content.substring(0, 160), // Kurze Beschreibung für Google
+    description: article.content.substring(0, 160),
   }
 }
 

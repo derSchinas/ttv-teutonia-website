@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
-// --- SCHEMA FÜR NEUE ARTIKEL (bleibt gleich) ---
+// --- SCHEMA FÜR NEUE ARTIKEL ---
 const NewsSchema = z.object({
   title: z.string().min(5, 'Der Titel muss mindestens 5 Zeichen lang sein.'),
   content: z.string().min(20, 'Der Inhalt muss mindestens 20 Zeichen lang sein.'),
@@ -34,9 +34,9 @@ type State = {
   message?: string | null;
 };
 
-// --- ACTION: NEUEN ARTIKEL ERSTELLEN (bleibt gleich) ---
+// --- ACTION: NEUEN ARTIKEL ERSTELLEN  ---
 export async function createNewsArticle(prevState: State, formData: FormData): Promise<State> {
-  // ... (keine Änderungen hier)
+  
   const supabase = await createServerSupabaseClient()
 
   const { data: { user } } = await supabase.auth.getUser()
@@ -84,9 +84,8 @@ export async function createNewsArticle(prevState: State, formData: FormData): P
   redirect('/ahv/news')
 }
 
-// --- ACTION: ARTIKEL LÖSCHEN (bleibt gleich) ---
+// --- ACTION: ARTIKEL LÖSCHEN ---
 export async function deleteNewsArticle(articleId: string, imagePath: string | null) {
-  // ... (keine Änderungen hier)
   const supabase = await createServerSupabaseClient()
 
   const { data: { user } } = await supabase.auth.getUser()

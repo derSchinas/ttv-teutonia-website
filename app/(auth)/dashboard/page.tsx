@@ -1,47 +1,55 @@
 // app/(auth)/dashboard/page.tsx
 
 import { createServerSupabaseClient } from '@/lib/supabase/server'
-import { StatsCards } from '@/components/dashboard/stats-cards'
-import { RecentEvents } from '@/components/dashboard/recent-events'
 import { redirect } from 'next/navigation'
+import { MemberDirectory } from '@/components/dashboard/member-directory'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
+// Wir definieren den Typ für das, was unsere Funktion zurückgibt
+export type VisibleProfile = {
+  id: string;
+  first_name: string | null;
+  last_name: string | null;
+  alias: string | null;
+  email: string | null;
+  phone: string | null;
+  address: string | null;
+}
+
+async function getDirectoryData(): Promise<VisibleProfile[]> {
+  const supabase = await createServerSupabaseClient()
+  // Wir rufen unsere sichere PostgreSQL-Funktion auf
+  const { data, error } = await supabase.rpc('get_visible_profiles')
+
+  if (error) {
+    console.error('Error fetching visible profiles:', error)
+    return []
+  }
+  return data
+}
 
 export default async function DashboardPage() {
-  const supabase = await createServerSupabaseClient()
+  const { data: { user } } = await (await createServerSupabaseClient()).auth.getUser()
+  if (!user) redirect('/auth/login')
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
-    redirect('/auth/login')
-  }
-
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', user.id)
-    .single()
+  const profiles = await getDirectoryData()
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">
-          Willkommen, {profile?.first_name || 'Mitglied'}!
-        </h1>
-        <p className="text-gray-600 mt-2">
-          TTV Teutonia Dashboard
-        </p>
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-3xl font-bold">Mitgliederverzeichnis</h1>
+          <p className="text-gray-600">
+            Kontaktdaten aller Mitglieder der TTV Teutonia.
+          </p>
+        </div>
+        <Link href="/dashboard/profile/edit">
+          <Button variant="outline">Eigenes Profil bearbeiten</Button>
+        </Link>
       </div>
-
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <StatsCards />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <RecentEvents />
-      </div>
+      
+      <MemberDirectory profiles={profiles} />
     </div>
   )
 }

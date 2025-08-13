@@ -45,6 +45,9 @@ export function Footer() {
               <Link href="/news" className="block hover:text-white">
                 News
               </Link>
+              <Link href="/semesterprogramm" className="block hover:text-white">
+                Semesterprogramm
+              </Link>
               <Link href="/rooms" className="block hover:text-white">
                 Zimmer
               </Link>
