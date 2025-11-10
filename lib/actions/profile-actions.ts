@@ -5,6 +5,7 @@ import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
+
 const ProfileSchema = z.object({
   firstName: z.string().min(2, 'Vorname ist erforderlich.'),
   lastName: z.string().min(2, 'Nachname ist erforderlich.'),
@@ -50,7 +51,7 @@ export async function updateMyProfile(prevState: State, formData: FormData): Pro
       phone_visibility: validatedFields.data.phone_visibility,
       address_visibility: validatedFields.data.address_visibility,
     })
-    .eq('id', user.id) // Wichtig: Nur das eigene Profil aktualisieren!
+    .eq('id', user.id) 
 
   if (error) {
     return { message: 'Fehler beim Speichern des Profils.', success: false }

@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
-// --- SCHEMA FÜR NEUE ARTIKEL ---
+// schema create news
 const NewsSchema = z.object({
   title: z.string().min(5, 'Der Titel muss mindestens 5 Zeichen lang sein.'),
   content: z.string().min(20, 'Der Inhalt muss mindestens 20 Zeichen lang sein.'),
@@ -16,7 +16,7 @@ const NewsSchema = z.object({
     .refine((file) => file.size < 4 * 1024 * 1024, 'Das Bild darf maximal 4MB groß sein.'),
 })
 
-// --- SCHEMA FÜR DAS BEARBEITEN (jetzt mit optionalem Bild) ---
+// schema edit news
 const UpdateNewsSchema = z.object({
   title: z.string().min(5, 'Der Titel muss mindestens 5 Zeichen lang sein.'),
   content: z.string().min(20, 'Der Inhalt muss mindestens 20 Zeichen lang sein.'),
@@ -28,13 +28,12 @@ const UpdateNewsSchema = z.object({
   oldImagePath: z.string().optional(),
 })
 
-// --- GEMEINSAMER STATE-TYP (bleibt gleich) ---
 type State = {
   errors?: { [key: string]: string[] | undefined };
   message?: string | null;
 };
 
-// --- ACTION: NEUEN ARTIKEL ERSTELLEN  ---
+// create news
 export async function createNewsArticle(prevState: State, formData: FormData): Promise<State> {
   
   const supabase = await createServerSupabaseClient()
@@ -84,7 +83,7 @@ export async function createNewsArticle(prevState: State, formData: FormData): P
   redirect('/ahv/news')
 }
 
-// --- ACTION: ARTIKEL LÖSCHEN ---
+// news delete
 export async function deleteNewsArticle(articleId: string, imagePath: string | null) {
   const supabase = await createServerSupabaseClient()
 
@@ -110,7 +109,7 @@ export async function deleteNewsArticle(articleId: string, imagePath: string | n
   revalidatePath('/ahv/news')
 }
 
-// --- ACTION: ARTIKEL BEARBEITEN (komplett überarbeitet) ---
+//  news edit 
 export async function updateNewsArticle(prevState: State, formData: FormData): Promise<State> {
   const supabase = await createServerSupabaseClient()
 
@@ -134,24 +133,23 @@ export async function updateNewsArticle(prevState: State, formData: FormData): P
 
   let newImageUrl: string | null = null;
 
-  // Schritt 1: Prüfen, ob ein neues Bild hochgeladen wurde
+  
   if (image && image.size > 0) {
-    // 1a: Neues Bild hochladen
+    // upload new pic
     const newFilePath = `${Date.now()}-${image.name.replace(/[^a-zA-Z0-9.]/g, '_')}`
     const { error: uploadError } = await supabase.storage.from('news-images').upload(newFilePath, image)
     if (uploadError) return { message: `Upload-Fehler: ${uploadError.message}` }
 
-    // 1b: URL des neuen Bildes holen
+    // Url new pic
     newImageUrl = supabase.storage.from('news-images').getPublicUrl(newFilePath).data.publicUrl
 
-    // 1c: Altes Bild aus dem Storage löschen, falls vorhanden
+    // delete old pic
     if (oldImagePath) {
       const { error: deleteError } = await supabase.storage.from('news-images').remove([oldImagePath])
       if (deleteError) console.error("Konnte altes Bild nicht löschen:", deleteError.message)
     }
   }
 
-  // Schritt 2: Datenbankeintrag aktualisieren
   const updateData: { title: string; content: string; featured_image?: string } = {
     title,
     content,

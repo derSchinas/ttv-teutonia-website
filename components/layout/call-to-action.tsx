@@ -15,17 +15,14 @@ interface CallToActionProps {
 export function CallToActionSection({ title, subtitle, buttonText, buttonLink }: CallToActionProps) {
   return (
     <section className="relative py-20 text-white overflow-hidden">
-      {/* Hintergrundbild */}
       <Image
         src="/home-background.png"
         alt="Hintergrundbild der TTV Teutonia"
         fill
         className="object-cover"
       />
-      {/* Abdunkelndes Overlay */}
       <div className="absolute inset-0 bg-black/40" />
 
-      {/* Inhalt */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold">{title}</h2>
         <p className="mt-4 max-w-2xl mx-auto text-gray-200">

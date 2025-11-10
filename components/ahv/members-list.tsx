@@ -30,18 +30,12 @@ const getRoleBadge = (role: Profile['role']) => {
 }
 
 export function MembersList({ members }: MembersListProps) {
-  // ===================================================================
-  // MASTER-DEBUG-TEIL
-  // ===================================================================
-  
-  // 1. Loggen der empfangenen Daten in der Browser-Konsole (F12)
+
   console.log('MembersList Component received props:', members);
 
   return (
     <div>
       
-
-      {/* Original-Tabelle */}
       <Card>
         <CardContent className="p-0">
           <Table>

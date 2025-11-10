@@ -10,7 +10,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
-// Annahme: Der 'Profile'-Typ ist in einer globalen Datei oder wird hier definiert
 type Profile = {
   id: string;
   first_name: string | null;

@@ -16,13 +16,11 @@ function SubmitButton() {
 }
 
 export function SettingsForm({ currentEmail }: { currentEmail: string }) {
-  // Dieser initialState passt jetzt perfekt zum State-Typ in der Action
   const initialState = { message: null };
   const [state, dispatch] = useActionState(updateApplicationEmail, initialState);
 
   useEffect(() => {
     if (state?.message) {
-      // Wir prüfen, ob die Nachricht vom Erfolgsfall kommt
       if (state.message.includes('erfolgreich')) {
         toast.success(state.message);
       } else {

@@ -1,8 +1,8 @@
 // components/ahv/create-member-form.tsx
 'use client'
 
-import { useActionState, useEffect } from 'react' // 1. 'useActionState' aus 'react' importieren
-import { useFormStatus } from 'react-dom' // 'useFormStatus' bleibt in 'react-dom'
+import { useActionState, useEffect } from 'react' 
+import { useFormStatus } from 'react-dom' 
 import { createMember } from '@/lib/actions/member-actions'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/select'
 import { toast } from 'react-hot-toast'
 
-// Eine separate Komponente für den Submit-Button, um den Pending-Status zu nutzen
 function SubmitButton() {
   const { pending } = useFormStatus()
   return (
@@ -28,11 +27,9 @@ function SubmitButton() {
 
 export function CreateMemberForm() {
   const initialState = { message: null, errors: {} }
-  // 2. Den Hook zu 'useActionState' umbenennen
   const [state, dispatch] = useActionState(createMember, initialState)
 
   useEffect(() => {
-    // Zeige eine Fehlermeldung an, wenn die Server Action eine zurückgibt
     if (state.message) {
       toast.error(state.message)
     }

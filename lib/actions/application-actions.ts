@@ -74,10 +74,9 @@ export async function submitApplication(prevState: State, formData: FormData): P
     const targetEmail = settings.value;
 
     await resend.emails.send({
-      from: 'bewerbung@ttv-teutonia.de', // WICHTIG: Ersetzen!
+      from: 'bewerbung@ttv-teutonia.de', 
       to: targetEmail,
-      // === HIER IST DIE KORREKTUR ===
-      replyTo: email, // Geändert von reply_to zu replyTo
+      replyTo: email, 
       subject: `Neue Zimmerbewerbung: ${firstName} ${lastName}`,
       react: ApplicationEmail({ firstName, lastName, email, phone, moveInDate, introduction }) as React.ReactElement,
     });

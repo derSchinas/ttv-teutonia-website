@@ -6,7 +6,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Card, CardContent } from '@/components/ui/card'
 import { Mail, Phone, Home, Lock } from 'lucide-react'
 
-// Hilfskomponente, um Daten oder "Verborgen" anzuzeigen
 const SensitiveData = ({ value, icon }: { value: string | null, icon: React.ReactNode }) => {
   if (value && value !== 'Verborgen') {
     return <div className="flex items-center gap-2">{icon}{value}</div>

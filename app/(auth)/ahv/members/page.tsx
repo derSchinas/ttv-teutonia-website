@@ -34,7 +34,6 @@ export default async function MembersPage() {
 
 	return (
 		<div className="container mx-auto px-4 py-8">
-			{/* === HIER IST DIE KORREKTUR === */}
 			<div className="mb-8">
 				<Link
 					href="/ahv"

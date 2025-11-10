@@ -14,7 +14,6 @@ const CreateMemberSchema = z.object({
   role: z.enum(['member', 'ahv', 'admin'], { message: 'Ungültige Rolle' }),
 })
 
-// Wir definieren einen Typ für den Rückgabewert der Funktion
 type State = {
   errors?: {
     firstName?: string[];
@@ -27,7 +26,6 @@ type State = {
 };
 
 export async function createMember(prevState: State, formData: FormData): Promise<State> {
-  // Daten aus dem Formular validieren
   const validatedFields = CreateMemberSchema.safeParse({
     firstName: formData.get('firstName'),
     lastName: formData.get('lastName'),
@@ -52,7 +50,6 @@ export async function createMember(prevState: State, formData: FormData): Promis
   )
 
   try {
-    // Benutzer in Supabase Auth erstellen
     const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
       email: email,
       password: password,
@@ -63,7 +60,6 @@ export async function createMember(prevState: State, formData: FormData): Promis
     if (authError) throw new Error(`Fehler beim Erstellen des Benutzers: ${authError.message}`);
     if (!authData.user) throw new Error('Unbekannter Fehler: Benutzer konnte nicht erstellt werden.');
 
-    // Zugehöriges Profil in der 'profiles'-Tabelle erstellen
     const { error: profileError } = await supabaseAdmin
       .from('profiles')
       .insert({
@@ -77,14 +73,12 @@ export async function createMember(prevState: State, formData: FormData): Promis
     if (profileError) throw new Error(`Fehler beim Erstellen des Profils: ${profileError.message}`);
 
   } catch (error) {
-    // Fehler an das Formular zurückgeben
     if (error instanceof Error) {
       return { message: error.message };
     }
     return { message: 'Ein unbekannter Fehler ist aufgetreten.' };
   }
 
-  // Bei Erfolg: Cache neu validieren und DANN weiterleiten
-  revalidatePath('/ahv/members', 'page') // ÄNDERUNG: 'page' als zweiten Parameter hinzufügen
+  revalidatePath('/ahv/members', 'page') 
   redirect('/ahv/members')
 }

@@ -11,17 +11,16 @@ interface PageHeaderProps {
 export function PageHeader({ title, subtitle }: PageHeaderProps) {
   return (
     <section className="relative py-20 text-white">
-      {/* Hintergrundbild */}
+      {/* Backgrund */}
       <Image
         src="/home-background.png"
         alt="Hintergrundbild der TTV Teutonia"
         fill
         className="object-cover"
       />
-      {/* Abdunkelndes Overlay */}
       <div className="absolute inset-0 bg-black/20" />
 
-      {/* Inhalt */}
+      {/* Text */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold">
           {title}

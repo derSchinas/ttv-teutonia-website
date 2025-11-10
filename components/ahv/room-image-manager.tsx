@@ -106,14 +106,12 @@ export function RoomImageManager({ room }: RoomImageManagerProps) {
         {room.room_images && room.room_images.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {room.room_images.map((image) => (
-              // === HIER IST DIE ÄNDERUNG ===
-              // Wir verwenden jetzt die robuste "fill"-Methode
               <div key={image.id} className="relative group aspect-video">
                 <Image
                   src={image.image_url}
                   alt={image.alt_text || `Bild von ${room.room_number}`}
-                  fill // Sagt dem Bild, es soll den Container füllen
-                  className="object-cover rounded-md" // Stellt sicher, dass das Bild nicht verzerrt wird
+                  fill 
+                  className="object-cover rounded-md" 
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center">
                   <Button

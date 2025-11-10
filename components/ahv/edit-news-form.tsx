@@ -3,7 +3,7 @@
 
 import { useActionState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
-import Image from 'next/image' // Image-Komponente importieren
+import Image from 'next/image'
 import { updateNewsArticle } from '@/lib/actions/news-actions'
 import { toast } from 'react-hot-toast'
 import { Button } from '@/components/ui/button'
@@ -31,7 +31,6 @@ export function EditNewsForm({ article }: { article: NewsArticle }) {
     }
   }, [state])
 
-  // Den reinen Pfad des alten Bildes extrahieren
   const oldImagePath = article.featured_image ? article.featured_image.split('/news-images/')[1] : ''
 
   return (
@@ -50,7 +49,7 @@ export function EditNewsForm({ article }: { article: NewsArticle }) {
         {state.errors?.content && <p className="text-sm text-red-500 mt-1">{state.errors.content[0]}</p>}
       </div>
 
-      {/* NEUER ABSCHNITT FÜR BILD-UPDATE */}
+      {/* Picture update */}
       <div>
         <Label>Aktuelles Titelbild</Label>
         {article.featured_image ? (

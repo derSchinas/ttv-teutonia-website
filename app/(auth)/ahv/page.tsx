@@ -43,8 +43,6 @@ export default async function AHVPage() {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* ... (Events, News, Mitglieder Karten bleiben gleich) ... */}
-        
         
         <Card>
           <CardHeader>
@@ -82,7 +80,6 @@ export default async function AHVPage() {
             <p className="text-gray-600 mb-4">
               Ändere den Zimmerstatus und verwalte die Bildergalerien.
             </p>
-            {/* === HIER IST DIE ÄNDERUNG === */}
             <Link href="/ahv/rooms/manage" className="text-blue-600 font-semibold hover:underline">
               Zimmer verwalten →
             </Link>

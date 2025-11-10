@@ -33,7 +33,7 @@ export function ApplicationForm() {
     if (state.message) {
       if (state.success) {
         toast.success(state.message)
-        formRef.current?.reset() // Formular nach Erfolg zurücksetzen
+        formRef.current?.reset()
         setDate(undefined)
       } else {
         toast.error(state.message)

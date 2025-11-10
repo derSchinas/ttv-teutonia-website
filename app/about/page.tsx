@@ -20,7 +20,6 @@ import {
   BookOpen,
 } from 'lucide-react'
 
-// ... (Die Daten-Arrays 'wirSind', 'wirWollen', 'wirBieten', 'geschichte' bleiben exakt gleich)
 const wirSind = [
   { icon: <Users className="h-6 w-6 text-violet-600" />, text: 'eine nichtschlagende, farbentragende Studentenverbindung.' },
   { icon: <Handshake className="h-6 w-6 text-violet-600" />, text: 'eine Gemeinschaft aus aktiven Mitgliedern (Studenten) und “Alten Herren” (Mitglieder nach dem Studium).' },
@@ -59,12 +58,10 @@ export default function AboutPage() {
         subtitle="Eine Gemeinschaft, die auf den Werten Freundschaft, Toleranz, Offenheit und Vertrauen basiert."
       />
 
-      {/* === HIER IST DIE KORREKTUR === */}
-      {/* "Wir sind / wollen / bieten" Grid (wieder eingefügt) */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* Spalte: Wir sind */}
+            {/* We are*/}
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-gray-900">Wir sind…</h2>
               {wirSind.map((item, index) => (
@@ -74,7 +71,7 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-            {/* Spalte: Wir wollen */}
+            {/* We want */}
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-gray-900">Wir wollen…</h2>
               {wirWollen.map((item, index) => (
@@ -84,7 +81,7 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-            {/* Spalte: Wir bieten */}
+            {/* We offer */}
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-gray-900">Wir bieten…</h2>
               {wirBieten.map((item, index) => (
@@ -98,7 +95,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Geschichte Sektion mit Hintergrundbild */}
+      {/* History section */}
       <section className="relative py-16 text-white overflow-hidden">
         <Image
           src="/history-background.png"
@@ -128,7 +125,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mitgliedschaft Call-to-Action */}
+      {/* Apply */}
       <CallToActionSection
         title="Interesse an einer Mitgliedschaft?"
         subtitle="Wenn Du an der Hochschule Reutlingen immatrikuliert bist und eine starke Gemeinschaft suchst, melde Dich bei uns. Wir freuen uns darauf, Dich kennenzulernen!"

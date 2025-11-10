@@ -8,12 +8,11 @@ import { createClient } from '@/lib/supabase/client'
 export type UserRole = 'member' | 'ahv' | 'admin'
 
 export function usePermissions() {
-  const { user, loading: authLoading } = useAuth() // Auch den Lade-Status vom AuthProvider holen
+  const { user, loading: authLoading } = useAuth() 
   const [role, setRole] = useState<UserRole | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Warten, bis die Authentifizierung abgeschlossen ist
     if (authLoading) {
       console.log('[Permissions] Waiting for auth to finish...');
       return;
@@ -24,7 +23,7 @@ export function usePermissions() {
       const supabase = createClient()
       
       const fetchRole = async () => {
-        setLoading(true); // Ladevorgang starten
+        setLoading(true); 
         const { data: profile, error } = await supabase
           .from('profiles')
           .select('role')
@@ -37,18 +36,17 @@ export function usePermissions() {
         
         console.log('[Permissions] Profile fetched:', profile);
         
-        // Setze die Rolle, wenn ein Profil gefunden wurde
         setRole(profile?.role as UserRole | null)
-        setLoading(false) // Ladevorgang beenden
+        setLoading(false) 
       }
 
       fetchRole()
     } else {
       console.log('[Permissions] No user found. Setting role to null.');
       setRole(null)
-      setLoading(false) // Ladevorgang beenden, da kein Benutzer da ist
+      setLoading(false) 
     }
-  }, [user, authLoading]) // Auf Änderungen von user UND authLoading reagieren
+  }, [user, authLoading]) 
 
   const permissions = {
     canViewContent: role !== null,
@@ -65,6 +63,5 @@ export function usePermissions() {
     canViewAllData: role === 'admin',
   }
 
-  // Gib den Ladezustand mit zurück!
   return { role, permissions, loading }
 }

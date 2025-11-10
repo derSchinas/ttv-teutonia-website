@@ -59,7 +59,7 @@ export function Navbar() {
     <nav className="bg-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          {/* Gruppe Links: Logo & Hauptnavigation */}
+          {/* Logo and public nav */}
           <div className="flex items-center gap-8">
             <Link href="/" className="flex-shrink-0 flex items-center">
               <Image src="/logo.png" alt="TTV Teutonia Wappen" width={40} height={40} className="mr-3" />
@@ -94,18 +94,16 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Gruppe Rechts: Benutzer-Aktionen */}
+          {/* User Interactions */}
           <div className="hidden md:flex items-center">
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link href="/dashboard"><Button variant="outline" size="sm"><User className="w-4 h-4 mr-2" />Dashboard</Button></Link>
                 
-                {/* === HIER IST DIE VEREINFACHUNG === */}
                 {permissionsLoading ? (
                   <Skeleton className="h-9 w-32 rounded-md" />
                 ) : (
                   <>
-                    {/* Zeige den Button nur für AHVs oder Admins. Er linkt IMMER zu /ahv */}
                     {permissions.canCreateEvents && (
                       <Link href="/ahv">
                         <Button variant="outline" size="sm">
@@ -151,7 +149,6 @@ export function Navbar() {
             {user ? (
               <>
                 <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>Dashboard</Link>
-                {/* Der Link zum AHV-Bereich bleibt auch hier einfach */}
                 {permissions.canCreateEvents && (<Link href="/ahv" className="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>AHV-Bereich</Link>)}
                 <button onClick={handleSignOut} className="text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium w-full text-left">Abmelden</button>
               </>

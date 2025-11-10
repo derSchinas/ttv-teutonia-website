@@ -2,7 +2,7 @@
 
 import { ApplicationForm } from '@/components/contact/application-form'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { PageHeader } from '@/components/layout/page-header' // 1. Neue Komponente importieren
+import { PageHeader } from '@/components/layout/page-header' 
 import { Mail, MapPin, Phone, CheckCircle } from 'lucide-react'
 
 export default function ContactPage() {
@@ -11,7 +11,6 @@ export default function ContactPage() {
 
   return (
     <div className="bg-gray-50">
-      {/* 2. Der alte Header wird durch die neue PageHeader-Komponente ersetzt */}
       <PageHeader
         title="Werde Teil unserer Gemeinschaft"
         subtitle="Wir freuen uns darauf, von dir zu hören. Nimm Kontakt auf oder bewirb dich direkt für ein Zimmer."
@@ -19,9 +18,8 @@ export default function ContactPage() {
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
-          {/* Kontakt & Prozess über dem Formular */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-            {/* Linke Spalte: Kontaktinfos */}
+            {/* Contact Info */}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Direkter Draht zu uns</h2>
               <div className="space-y-4">
@@ -49,7 +47,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Rechte Spalte: Bewerbungsprozess */}
+            {/* Application process */}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Der Bewerbungsprozess</h2>
               <div className="space-y-4">
@@ -78,7 +76,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Bewerbungsformular */}
+          {/* Applciation form */}
           <Card className="shadow-lg">
             <CardHeader>
               <CardTitle className="text-2xl">Bewirb dich für ein Zimmer</CardTitle>
@@ -93,7 +91,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Karten-Sektion */}
+      {/* Google Maps */}
       <section className="pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">

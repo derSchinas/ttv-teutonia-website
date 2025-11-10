@@ -20,7 +20,6 @@ export function NewsCardActions({ articleId, featuredImage }: NewsCardActionsPro
     if (confirm('Möchten Sie diesen Artikel wirklich endgültig löschen?')) {
       startTransition(async () => {
         try {
-          // Der Pfad ist der Teil der URL nach dem Bucket-Namen
           const imagePath = featuredImage ? featuredImage.split('/news-images/')[1] : null
           await deleteNewsArticle(articleId, imagePath)
           toast.success('Artikel erfolgreich gelöscht.')

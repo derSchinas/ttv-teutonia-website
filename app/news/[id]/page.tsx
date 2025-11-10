@@ -40,14 +40,14 @@ export default async function NewsArticlePage({ params }: { params: { id: string
     <article className="bg-white">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
-          {/* Zurück-Link */}
+
           <div className="mb-8">
             <Link href="/news" className="text-sm text-blue-600 hover:underline">
               &larr; Zurück zur News-Übersicht
             </Link>
           </div>
 
-          {/* Titelbild */}
+          {/* Main Picture */}
           {article.featured_image && (
             <div className="relative aspect-video w-full mb-8 overflow-hidden rounded-lg shadow-lg">
               <Image
@@ -55,7 +55,7 @@ export default async function NewsArticlePage({ params }: { params: { id: string
                 alt={`Titelbild für ${article.title}`}
                 fill
                 className="object-cover"
-                priority // Wichtigstes Bild auf der Seite, soll schnell laden
+                priority 
               />
             </div>
           )}
@@ -75,12 +75,9 @@ export default async function NewsArticlePage({ params }: { params: { id: string
             </p>
           </header>
 
-          {/* Inhalt */}
+          {/* Text */}
           <div
             className="prose prose-lg max-w-none"
-            // Wir verwenden hier `dangerouslySetInnerHTML`, um formatierten Text zu ermöglichen.
-            // In einem echten CMS würde man hier einen Markdown-Parser verwenden.
-            // Für einfachen Text ist es sicher.
             dangerouslySetInnerHTML={{ __html: article.content.replace(/\n/g, '<br />') }}
           />
         </div>

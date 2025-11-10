@@ -6,7 +6,6 @@ import { MemberDirectory } from '@/components/dashboard/member-directory'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-// Wir definieren den Typ für das, was unsere Funktion zurückgibt
 export type VisibleProfile = {
   id: string;
   first_name: string | null;
@@ -19,7 +18,6 @@ export type VisibleProfile = {
 
 async function getDirectoryData(): Promise<VisibleProfile[]> {
   const supabase = await createServerSupabaseClient()
-  // Wir rufen unsere sichere PostgreSQL-Funktion auf
   const { data, error } = await supabase.rpc('get_visible_profiles')
 
   if (error) {

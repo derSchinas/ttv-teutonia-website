@@ -17,7 +17,6 @@ import { CallToActionSection } from "@/components/layout/call-to-action";
 export const dynamic = "force-dynamic";
 
 async function getPublishedNews(): Promise<NewsArticle[]> {
-	// ... (Funktion bleibt unverändert)
 	const supabase = await createServerSupabaseClient();
 	const { data, error } = await supabase
 		.from("news")
@@ -52,7 +51,6 @@ export default async function NewsPage() {
 									href={`/news/${article.id}`}
 									className="flex"
 								>
-									{/* === HIER IST DIE FINALE KORREKTUR === */}
 									<Card className="flex w-full flex-col overflow-hidden p-0 shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
 										{article.featured_image && (
 											<div className="relative aspect-video">

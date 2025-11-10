@@ -16,8 +16,8 @@ import {
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription, // Hinzugefügt
-	DialogTitle, // Hinzugefügt
+	DialogDescription, 
+	DialogTitle, 
 } from "@/components/ui/dialog";
 
 interface RoomCardProps {
@@ -98,7 +98,6 @@ export function RoomCard({ room }: RoomCardProps) {
 
 			<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
 				<DialogContent className="max-h-[90vh] max-w-[90vw] p-2">
-					{/* === HIER IST DIE KORREKTUR === */}
 					<DialogTitle className="sr-only">
 						Bilder von {room.room_number}
 					</DialogTitle>

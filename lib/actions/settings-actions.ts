@@ -7,12 +7,10 @@ import { z } from 'zod'
 
 const EmailSchema = z.string().email('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
 
-// Wir definieren einen klaren State-Typ, der 'null' für den Anfangszustand erlaubt
 type State = {
   message: string | null;
 };
 
-// Wir verwenden diesen State-Typ in der Funktionssignatur
 export async function updateApplicationEmail(prevState: State, formData: FormData): Promise<State> {
   const email = formData.get('email') as string;
 

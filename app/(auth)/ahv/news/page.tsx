@@ -18,7 +18,6 @@ import type { NewsArticle } from "@/types/database";
 export const dynamic = "force-dynamic";
 
 async function getNews(): Promise<NewsArticle[]> {
-	// ... (Funktion bleibt unverändert)
 	const supabase = await createServerSupabaseClient();
 	const { data, error } = await supabase
 		.from("news")
@@ -60,7 +59,6 @@ export default async function ManageNewsPage() {
 
 			<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{newsArticles.map(article => (
-					// === HIER IST DIE FINALE KORREKTUR ===
 					<Card
 						key={article.id}
 						className="flex flex-col overflow-hidden p-0 shadow-md"

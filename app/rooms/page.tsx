@@ -31,7 +31,6 @@ export type Room = {
 	room_images: RoomImage[];
 };
 
-// Datenlade-Funktion bleibt unverändert
 async function getRooms(): Promise<Room[]> {
 	const supabase = await createServerSupabaseClient();
 	const { data, error } = await supabase
@@ -46,7 +45,7 @@ async function getRooms(): Promise<Room[]> {
 	return data as Room[];
 }
 
-// === NEU: Daten für die Gemeinschaftsräume (vorerst hartcodiert) ===
+// Pictures shared area 
 const gemeinschaftsraeume = {
 	images: [
 		{
@@ -89,7 +88,7 @@ export default async function RoomsPage() {
 				</div>
 			</section>
 
-			{/* === NEU: Sektion für Gemeinschaftsräume === */}
+			{/* Shared Aread section */}
 			<section className="bg-gray-50 py-16">
 				<div className="container mx-auto px-4">
 					<h2 className="mb-8 text-center text-3xl font-bold">

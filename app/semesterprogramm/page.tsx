@@ -8,7 +8,6 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Download, CalendarPlus } from "lucide-react";
-// === KORREKTUR: Neue Komponenten importieren ===
 import { PageHeader } from "@/components/layout/page-header";
 import { CallToActionSection } from "@/components/layout/call-to-action";
 
@@ -22,15 +21,12 @@ export default function SemesterprogrammPage() {
 	)}/public/basic.ics`;
 
 	return (
-		// === KORREKTUR: Hintergrund auf weiß setzen ===
 		<div className="bg-white">
-			{/* === KORREKTUR: PageHeader verwenden === */}
 			<PageHeader
 				title="Semesterprogramm"
 				subtitle="Alle Termine und Veranstaltungen auf einen Blick. Synchronisiere den Kalender mit deinem Gerät."
 			/>
 
-			{/* === KORREKTUR: Hauptinhalt in eine <section> packen === */}
 			<section className="py-16">
 				<div className="container mx-auto px-4">
 					<div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -84,7 +80,6 @@ export default function SemesterprogrammPage() {
 				</div>
 			</section>
 
-			{/* === KORREKTUR: Call-to-Action hinzufügen === */}
 			<CallToActionSection
 				title="Komm vorbei!"
 				subtitle="Besuche eine unserer öffentlichen Veranstaltungen und lerne uns persönlich kennen. Wir freuen uns auf dich."
